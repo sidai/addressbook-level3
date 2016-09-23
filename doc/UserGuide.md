@@ -33,6 +33,20 @@ Examples:
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
+## Edit a person : `edit`
+Edit one piece of information of a person in the address book.<br>
+Format: `edit INDEX EDITED_CATEGORY NEW_CONTENT
+ 
+> The index refers to the index number shown in the most recent listing
+> EDITED_CATEGORY refers to four kind of information of a person: name, address, phone and email
+> NEW_CONTENT refers to the new content after editing
+> Only a single piece of information can be modified per time
+> EDITED_CATEGORY is not case sensitive
+
+Examples:
+* `edit 1 naMe Mary Wong
+* `edit 2 addRESS Kent Ridge Drive
+
 ## Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`
