@@ -1,5 +1,6 @@
 package seedu.addressbook.data.person;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.Objects;
@@ -52,6 +53,26 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Address getAddress() {
         return address;
+    }
+
+    @Override
+    public void setName(String replecement) throws IllegalValueException {
+        this.name = new Name(replecement);
+    }
+
+    @Override
+    public void setPhone(String replecement, boolean isPrivate) throws IllegalValueException {
+        this.phone = new Phone(replecement, isPrivate);
+    }
+
+    @Override
+    public void setEmail(String replecement, boolean isPrivate) throws IllegalValueException {
+        this.email = new Email(replecement, isPrivate);
+    }
+
+    @Override
+    public void setAddress(String replecement, boolean isPrivate) throws IllegalValueException {
+        this.address = new Address(replecement, isPrivate);
     }
 
     @Override
