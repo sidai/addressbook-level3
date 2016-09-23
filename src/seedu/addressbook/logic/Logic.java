@@ -9,6 +9,7 @@ import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.Storage;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,24 +19,29 @@ import java.util.Optional;
 public class Logic {
 
 
-    private Storage storage;
+    private LinkedList<Storage> storageList = new LinkedList<Storage> ();
     private AddressBook addressBook;
+    private int storageIndex = storageList.size();
 
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
     public Logic() throws Exception{
-        setStorage(initializeStorage());
-        setAddressBook(storage.load());
+        addStorage(initializeStorage());
+        setAddressBook(storageList.getLast().load());
     }
 
     Logic(Storage storageFile, AddressBook addressBook){
-        setStorage(storageFile);
+        addStorage(storageFile);
         setAddressBook(addressBook);
     }
 
-    void setStorage(Storage storage){
-        this.storage = storage;
+    public void setStorageIndex(int index) {
+    	this.storageIndex = index;
+    }
+
+    void addStorage(Storage storage){
+        this.storageList.add(storage);
     }
 
     void setAddressBook(AddressBook addressBook){
@@ -52,7 +58,7 @@ public class Logic {
     }
 
     public String getStorageFilePath() {
-        return storage.getPath();
+        return storageList.get(storageIndex - 1).getPath();
     }
 
     /**
@@ -87,7 +93,7 @@ public class Logic {
     private CommandResult execute(Command command) throws Exception {
         command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
-        storage.save(addressBook);
+        storageList.get(storageIndex - 1).save(addressBook);
         return result;
     }
 
